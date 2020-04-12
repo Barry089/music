@@ -1,0 +1,18 @@
+{% extends "title_base.html" %}
+{% block title %}
+{% load staticfiles %}
+</head>
+<body class="index">
+    <div>
+
+    </div>
+<form id="searchForm" action="{% url 'search' 1 %}" method="post" target="_blank">
+    {% csrf_token %}
+    <div class="search-keyword">
+        <input name="kword" type="text" class="keyword" maxlength="120" placeholder="音乐节" />
+    </div>
+    <input id="subSearch" type="submit" class="search-button" value="搜 索" />
+</form>
+
+</body>
+</html>
