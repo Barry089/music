@@ -1,18 +1,28 @@
 {% extends "title_base.html" %}
 {% block title %}
-{% load staticfiles %}
+{% load static %}
+<link type="image/x-icon" rel="shortcut icon" href="{% static 'favicon.ico' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/common.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
+
 <body class="index">
-    <div>
-
+    <div class="header">
+        <a href="/" class="logo" title="首页"><img alt="我的音乐" src="{% static 'image/logo.png' %}"></a>
+        <div class="search-box">
+            <form id="searchForm" action="{% url 'search' 1 %}" method="post" target="_blank">
+            {% csrf_token %}
+                <div class="search-keyword">
+                    <input name="kword" type="text" class="keyword" maxlength="120" placeholder="音乐节" />
+                </div>
+                <input id="subSearch" type="submit" class="search-button" value="搜 索" />
+            </form>
+            <div id="suggest" class="search-suggest"></div>
+            <div class="search-hot-words">
+                {% for song in search_song %}
+                <a target="play" href="{% url 'play' song.song.song_id %}">{{ song.song.song_name }}</a>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-<form id="searchForm" action="{% url 'search' 1 %}" method="post" target="_blank">
-    {% csrf_token %}
-    <div class="search-keyword">
-        <input name="kword" type="text" class="keyword" maxlength="120" placeholder="音乐节" />
-    </div>
-    <input id="subSearch" type="submit" class="search-button" value="搜 索" />
-</form>
-
-</body>
-</html>
+{% endblock %}
