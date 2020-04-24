@@ -37,4 +37,4 @@ def searchView(request, page):
 
     else:
         request.session['kword'] = request.POST.get('kword', '')
-        return redirect('search/1.html')
+        return redirect('/search/1.html')
